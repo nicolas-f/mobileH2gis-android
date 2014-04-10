@@ -58,6 +58,7 @@ public class MainActivity extends ActionBarActivity {
                 }
                 Class.forName("org.h2.Driver");
                 this.connection = DriverManager.getConnection("jdbc:h2:mem:syntax", "sa", "sa");
+                CreateSpatialExtension.initSpatialExtension(connection);
             } catch (Exception ex) {
                 ex.printStackTrace();
             }
@@ -136,7 +137,7 @@ public class MainActivity extends ActionBarActivity {
                 this.connection.createStatement().execute(query);
             }
         } catch (Exception ex) {
-            ex.printStackTrace();
+            textViewToChange.setText(ex.getMessage());
         }
 
     }
